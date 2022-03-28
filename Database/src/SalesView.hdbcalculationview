@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SalesView" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="SalesView"/>
+<localVariables>
+  <variable id="VAR_1">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="VARCHAR" length="10" mandatory="true" defaultValue="">
+      <valueDomain type="AttributeValue">
+        <attribute name="SOURCE"/>
+      </valueDomain>
+      <selection type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MERGE_SALES_ORDER_2015">
+    <resourceUri>MERGE_SALES_ORDER_2015</resourceUri>
+  </DataSource>
+  <DataSource id="Projection_2$$$$MERGE_SALES_ORDER_2015$$">
+    <resourceUri>MERGE_SALES_ORDER_2015</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="SALESORDERID"/>
+      <viewAttribute id="QUANTITY"/>
+      <viewAttribute id="QUANTITYUNIT"/>
+    
+      <viewAttribute id="NETAMOUNT"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="HISTORY_CREATEDAT"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="YEAR" datatype="NVARCHAR" length="13" expressionLanguage="SQL">
+        <formula>TO_NVARCHAR(&quot;HISTORY_CREATEDAT&quot;,'YYYY')</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="SO" datatype="NVARCHAR" length="20" expressionLanguage="SQL">
+    
+        <formula>TO_NVARCHAR(&quot;SALESORDERID&quot;)</formula>
+    
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MERGE_SALES_ORDER_2015"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="QUANTITY" aggregationType="sum"/>
+      <viewAttribute id="QUANTITYUNIT"/>
+    
+      <viewAttribute id="YEAR"/>
+    
+      <viewAttribute datatype="VARCHAR" length="10" id="SOURCE"/>
+    
+      <viewAttribute id="SO"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="SOURCE" null="false" value="2014"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="SO" source="SO"/>
+    </input>
+    <input node="Projection_2" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+    
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="SOURCE" null="false" value="2015"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="SO" source="SO"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="QUANTITY"/>
+      <viewAttribute id="QUANTITYUNIT"/>
+      <viewAttribute id="SALESORDERID"/>
+    
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="HISTORY_CREATEDAT"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="YEAR" datatype="NVARCHAR" length="13" expressionLanguage="SQL">
+        <formula>TO_NVARCHAR(&quot;HISTORY_CREATEDAT&quot;,'YYYY')</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="SO" datatype="NVARCHAR" length="20" expressionLanguage="SQL">
+    
+        <formula>TO_NVARCHAR(&quot;SALESORDERID&quot;)</formula>
+    
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Projection_2$$$$MERGE_SALES_ORDER_2015$$"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Union_1">
+  <attributes>
+    <attribute id="QUANTITYUNIT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUANTITYUNIT"/>
+      <keyMapping columnObjectName="Union_1" columnName="QUANTITYUNIT"/>
+    </attribute>
+    <attribute id="YEAR" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Union_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="SOURCE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SOURCE"/>
+      <localVariable>VAR_1</localVariable>
+      <keyMapping columnObjectName="Union_1" columnName="SOURCE"/>
+    </attribute>
+  
+    <attribute id="SO" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SO"/>
+  
+      <keyMapping columnObjectName="Union_1" columnName="SO"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="QUANTITY" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="QUANTITY"/>
+      <measureMapping columnObjectName="Union_1" columnName="QUANTITY"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

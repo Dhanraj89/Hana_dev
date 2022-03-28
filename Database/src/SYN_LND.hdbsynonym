@@ -1,0 +1,140 @@
+{
+  "HANA_LND.db::EMP": {
+    "target": {
+      "object": "EMP",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::MASK": {
+    "target": {
+      "object": "MASK",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::MASK1": {
+    "target": {
+      "object": "MASK1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SO_COMP": {
+    "target": {
+      "object": "SO_COMP",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SO_COMP1": {
+    "target": {
+      "object": "SO_COMP1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SO_SRC1": {
+    "target": {
+      "object": "SO_SRC1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SO_TARGET": {
+    "target": {
+      "object": "SO_TARGET",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::T1": {
+    "target": {
+      "object": "T1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::T2": {
+    "target": {
+      "object": "T2",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E1": {
+    "target": {
+      "object": "E1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E2": {
+    "target": {
+      "object": "E2",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SRC_E1": {
+    "target": {
+      "object": "SRC_E1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::TARGET_E1": {
+    "target": {
+      "object": "TARGET_E1",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::TARGET": {
+    "target": {
+      "object": "TARGET",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::TARGET_E2": {
+    "target": {
+      "object": "TARGET_E2",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SRC_HIS": {
+    "target": {
+      "object": "SRC_HIS",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::TARGET_HIS": {
+    "target": {
+      "object": "TARGET_HIS",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E_D": {
+    "target": {
+      "object": "E_D",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E_L": {
+    "target": {
+      "object": "E_L",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E_E": {
+    "target": {
+      "object": "E_E",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::E_R": {
+    "target": {
+      "object": "E_R",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::PIVOT": {
+    "target": {
+      "object": "PIVOT",
+      "schema": "HANA_LND"
+    }
+  },
+  "HANA_LND.db::SO": {
+    "target": {
+      "object": "SO",
+      "schema": "HANA_LND"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="intersect" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="intersect"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HANA_LND.db::T1">
+    <resourceUri>HANA_LND.db::T1</resourceUri>
+  </DataSource>
+  <DataSource id="HANA_LND.db::T2">
+    <resourceUri>HANA_LND.db::T2</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:IntersectView" id="Intersect_1">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="COLOUR"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="HANA_LND.db::T1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COLOUR" source="COLOUR"/>
+    </input>
+    <input node="HANA_LND.db::T2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COLOUR" source="COLOUR"/>
+    </input>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Intersect_1">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Intersect_1" columnName="ID"/>
+    </attribute>
+    <attribute id="COLOUR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COLOUR"/>
+      <keyMapping columnObjectName="Intersect_1" columnName="COLOUR"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Intersect_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="38" y="198"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,16 @@
+FUNCTION "TF"( )
+    RETURNS TABLE ("ID" NVARCHAR(10),
+                    "NAME" NVARCHAR(20),
+	                "SAL" DECIMAL(10, 2))
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER AS
+BEGIN
+    /*****************************
+        Write your function logic
+    ****************************/
+
+    RETURN SELECT "ID",
+	             "NAME",
+	              "SAL"
+            FROM "HANA_LND.db::EMP";
+END;

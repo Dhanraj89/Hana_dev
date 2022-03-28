@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="EMP_DETAILS_V" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="EMP_DETAILS_V"/>
+<localVariables>
+  <variable id="EMP" parameter="true">
+    <descriptions defaultDescription="EMP"/>
+    <variableProperties datatype="NVARCHAR" length="10" scale="NaN" mandatory="true" defaultValue="">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+      <derivationRule inputEnabled="true">
+        <resourceUri>EMP_DETAILS</resourceUri>
+        <resultElementName>EMP_NO</resultElementName>
+      </derivationRule>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="EMP_DETAILS">
+    <resourceUri>EMP_DETAILS</resourceUri>
+  </DataSource>
+  <DataSource id="EMP_REGION">
+    <resourceUri>EMP_REGION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EMP_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute id="DATE"/>
+      <viewAttribute id="HC"/>
+      <viewAttribute id="SAL"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="EMP_DETAILS"/>
+    <filter>not isnull(&quot;NAME&quot;) AND &quot;EMP_NO&quot;='$$EMP$$'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+    <viewAttributes>
+      <viewAttribute id="EMP_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute id="DATE"/>
+      <viewAttribute id="HC" aggregationType="sum"/>
+      <viewAttribute id="SAL" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1"/>
+    <rankingFilter type="RANK" offset="0" offsetReference="BACK" dynamicPartitionAttributes="false">
+      <partitionViewAttributeName id="EMP_NO"/>
+      <partitionViewAttributeName id="NAME"/>
+      <order byViewAttributeName="DATE" direction="ASC"/>
+      <rankThreshold>
+        <value>1</value>
+      </rankThreshold>
+      <rankViewAttributeName>Rank_Column</rankViewAttributeName>
+    </rankingFilter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="EMP_NO"/>
+      <viewAttribute id="REGION"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="STATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="EMP_REGION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="EMP_NO"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute id="DATE"/>
+      <viewAttribute id="HC" aggregationType="sum"/>
+      <viewAttribute id="SAL" aggregationType="sum"/>
+      <viewAttribute id="Rank_Column" aggregationType="sum"/>
+      <viewAttribute id="REGION"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="STATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Rank_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMP_NO" source="EMP_NO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HC" source="HC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SAL" source="SAL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Rank_Column" source="Rank_Column"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="REGION" source="REGION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="STATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMP_NO" source="EMP_NO"/>
+    </input>
+    <joinAttribute name="EMP_NO"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="EMP_NO" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMP_NO"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMP_NO"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="ROLE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ROLE"/>
+      <keyMapping columnObjectName="Join_1" columnName="ROLE"/>
+    </attribute>
+    <attribute id="DATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="DATE"/>
+    </attribute>
+  
+    <attribute id="REGION" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REGION"/>
+  
+      <keyMapping columnObjectName="Join_1" columnName="REGION"/>
+  
+    </attribute>
+    <attribute id="COUNTRY" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="STATE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="STATE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="HC" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="HC"/>
+      <measureMapping columnObjectName="Join_1" columnName="HC"/>
+    </measure>
+    <measure id="SAL" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SAL"/>
+      <measureMapping columnObjectName="Join_1" columnName="SAL"/>
+    </measure>
+    <measure id="Rank_Column" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Rank_Column"/>
+      <measureMapping columnObjectName="Join_1" columnName="Rank_Column"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="145" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="446"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Rank_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="341"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="306" y="341"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="145" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Rank_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="17" y="42"/>
+      <rectangleSize width="155"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

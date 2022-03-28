@@ -1,0 +1,54 @@
+PROCEDURE "PROC_CNTRL"(OUT O "SO_D" )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA 
+   AS
+BEGIN
+
+DECLARE ID INTEGER;
+
+DECLARE FROM_TIME TIMESTAMP;
+   /*************************************
+       Write your procedure logic
+   *************************************/
+/*
+   ---IF :"LOAD_TYPE" = 'INITIAL'
+   --THEN
+   --TRUNCATE TABLE "CONTROL_TABLE";
+
+   SELECT MAX(ID) INTO ID FROM "CONTROL_TABLE";
+
+    --INSERT INTO "CONTROL_TABLE"
+   O = SELECT CASE WHEN :ID IS NULL THEN 1 ELSE :ID END AS ID,
+          :"LOAD_TYPE" AS "LOAD_TYPE",
+	      MIN("SLT") AS "FROM",
+	       MAX("SLT") AS "TO"
+        FROM "HANA_LND.db::SO";
+
+    
+     
+
+
+    END IF;
+    IF :"LOAD_TYPE" = 'DELTA'
+    THEN
+    I =  :"LOAD_TYPE";
+    SELECT MAX(ID) INTO ID FROM "CONTROL_TABLE";
+
+    SELECT  "TO" INTO FROM_TIME  FROM "CONTROL_TABLE" WHERE ID =:ID;
+
+    --INSERT INTO "CONTROL_TABLE"
+
+   O = SELECT :ID + 1 AS ID,
+          :"LOAD_TYPE" AS "LOAD_TYPE",
+	      :FROM_TIME AS "FROM",
+	       MAX("SLT") AS "TO"
+
+    FROM "HANA_LND.db::SO" ;
+
+     END IF;
+*/
+
+O = SELECT * FROM "HANA_LND.db::SO";
+END

@@ -1,0 +1,14 @@
+{
+    "CNT": {
+        "object_owner": {
+            "roles": [
+                "CROSS_ROLE"
+            ]
+        },
+        "application_user": {
+            "roles": [
+                "CROSS_ROLE"
+            ]
+        }
+    }
+}

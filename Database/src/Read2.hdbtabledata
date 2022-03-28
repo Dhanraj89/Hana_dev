@@ -1,0 +1,28 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "EMP_REGION",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "REGION.csv",
+                "has_header": true,
+                "dialect"   : "HANA",
+                "type_config": {
+				"delimiter": ","
+			}
+            },
+            "import_settings": {
+            	"include_filter" : [ ],            
+                "import_columns": [
+                    "EMP_NO",
+                    "REGION",
+                    "COUNTRY",
+                    "STATE"
+                    
+                   
+                ]
+            }
+        }
+    ]
+}

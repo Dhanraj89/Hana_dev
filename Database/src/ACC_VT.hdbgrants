@@ -1,0 +1,25 @@
+{
+  "VT_CNT":{
+   "object_owner": {
+       "global_object_privileges": [
+       {
+        "name": "VT2",
+        "type": "REMOTE SOURCE",
+        "privileges": [
+            "CREATE VIRTUAL TABLE",
+            "DROP",
+            "CREATE REMOTE SUBSCRIPTION"
+        ]
+    }
+        ],
+        "roles":[
+            "R_VT"
+        ]
+       },
+       "application_user": {
+           "roles":[
+            "R_VT"   
+           ]
+       }
+    }
+}

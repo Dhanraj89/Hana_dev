@@ -1,0 +1,12 @@
+{
+    "role": {
+    "name": "HANA_LND_ACC",
+    "schema_privileges": [
+     {
+         "privileges": [
+             "SELECT"
+         ]
+     }
+    ]
+    }
+}

@@ -1,0 +1,21 @@
+PROCEDURE "PROC_EMP"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+  -- READS SQL DATA
+    AS
+BEGIN
+   /*************************************
+       Write your procedure logic
+   *************************************/
+
+INSERT INTO "EMP_RANGE" 
+("ID",
+"YEAR",
+"SAL")
+  
+ SELECT "ID",
+         "YEAR",
+         "SAL"
+FROM "HANA_LND.db::PIVOT" ;
+END;

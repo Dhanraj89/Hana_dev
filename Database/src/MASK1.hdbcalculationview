@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MASK1" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="MASK1"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HANA_LND.db::MASK1">
+    <resourceUri>HANA_LND.db::MASK1</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+
+<logicalModel id="HANA_LND.db::MASK1">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="MASK1" columnName="ID"/>
+    </attribute>
+    <attribute id="CC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CC"/>
+      <maskingExpression>CONCAT('###-###-',RIGHT(&quot;CC&quot;,2))</maskingExpression>
+      <keyMapping columnObjectName="MASK1" columnName="CC"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>
